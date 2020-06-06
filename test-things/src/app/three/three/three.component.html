@@ -1,0 +1,22 @@
+<div>
+  <div>fieldOfView: <input [(ngModel)]="fieldOfView"></div>
+  <div>nearClippingPane: <input [(ngModel)]="nearClippingPane"></div>
+  <div>farClippingPane: <input [(ngModel)]="farClippingPane"></div>
+  <div>widthSegments: <input [(ngModel)]="widthSegments"></div>
+  <div>heightSegments: <input [(ngModel)]="heightSegments"></div>
+  <div>radius: <input [(ngModel)]="radius"></div>
+  <div>target: <input [(ngModel)]="target"></div>
+
+  <button (click)="applyChanges()">APPLY</button>
+
+  <canvas #canvas
+          (window:resize)="onResize($event)"
+          (dragenter)="onDragEnter($event)"
+          (dragleave)="onDragLeave($event)"
+          (dragover)="onDragOver($event)"
+          (drop)="onDrop($event)"
+          (mousedown)="onMouseDown($event)"
+          (mousemove)="onMouseMove($event)"
+          (mouseup)="onMouseUp($event)"
+          (wheel)="onWheel($event)"></canvas>
+</div>
