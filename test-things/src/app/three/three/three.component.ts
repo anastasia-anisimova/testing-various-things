@@ -24,9 +24,9 @@ export class ThreeComponent implements OnInit, AfterViewInit {
   }
 
  // fieldOfView = 75;
-  fieldOfView = 160;
-  nearClippingPane = 0.3;
-  farClippingPane = 1000;
+  fieldOfView = 60; // вертикальное поле обзора камеры
+  nearClippingPane = 80;
+  farClippingPane = 1500;
   widthSegments = 60;
   heightSegments = 30;
   radius = 500;
@@ -142,7 +142,7 @@ export class ThreeComponent implements OnInit, AfterViewInit {
     let aspectRatio = this.getAspectRatio();
     this.camera = new THREE.PerspectiveCamera(
       this.fieldOfView,
-      aspectRatio,
+      1,
       this.nearClippingPane,
       this.farClippingPane
     );
