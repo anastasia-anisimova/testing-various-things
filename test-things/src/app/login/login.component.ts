@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "./auth.service";
+import {AuthService} from "../../services/auth.service";
 import {tap} from "rxjs/operators";
 
 @Component({
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.authService.login(this.form.get('login').value, this.form.get('password').value)
+    this.authService.login({ login:this.form.get('login').value, password: this.form.get('password').value})
       .pipe(
         tap(() => console.log('success auth')))
       .subscribe();

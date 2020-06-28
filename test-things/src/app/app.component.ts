@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {TestThingsService} from "./test-things.service";
-import {Observable, Subject} from "rxjs";
-import {debounceTime, flatMap} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -10,22 +9,11 @@ import {debounceTime, flatMap} from "rxjs/operators";
 })
 export class AppComponent implements OnInit {
   title = 'test-things';
-  testString$: Observable<string>;
+  isAuthorized$: Observable<boolean> = this.authService.logIn;
 
-  private refreshSubj = new Subject<void>();
-
-  constructor(private testThingsService: TestThingsService) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
-    this.testString$ = this.refreshSubj.pipe(
-      debounceTime(250),
-      flatMap(() => this.testThingsService.testHttpRequest()),
-    );
-  }
-
-  setInitData() {
-    //this.testString$ = this.testThingsService.testHttpRequest()
-    this.refreshSubj.next();
   }
 }

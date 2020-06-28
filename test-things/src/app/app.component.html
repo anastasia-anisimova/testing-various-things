@@ -1,3 +1,13 @@
-<button (click)="setInitData()">GET</button>
-{{testString$ | async}}
+<button *ngIf="isAuthorized$ | async; else notAuthorized"
+        mat-raised-button
+        color="primary"
+        routerLink="profile">Go to Profile
+</button>
+<ng-template #notAuthorized>
+  <button mat-raised-button
+          color="primary"
+          routerLink="login">Login
+  </button>
+</ng-template>
+{{isAuthorized$ | async}}
 <router-outlet></router-outlet>

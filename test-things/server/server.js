@@ -7,8 +7,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const JWT_Secret = '12341234';
-const testUser = { email: 'anisimova@gmail.com', password: '1234'};
+const JWT_Secret = 'secret_key';
+const testUser = { login: 'a', password: '1234'};
 
 // *************** API methods **************//
 
@@ -26,7 +26,7 @@ app.post('/api/authenticate', (req, res) => {
     let user = req.body;
     console.log(user)
 
-    if (testUser.email===req.body.email && testUser.password === req.body.password) {
+    if (testUser.login === req.body.login && testUser.password === req.body.password) {
       let token = jwt.sign(user, JWT_Secret);
       res.status(200).send({
         signed_user: user,
