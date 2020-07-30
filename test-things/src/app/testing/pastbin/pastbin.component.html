@@ -1,0 +1,20 @@
+<div>{{title}}
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Language</th>
+    <th>Paste</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let paste of pastebins">
+    <td>{{paste.id}}</td>
+    <td>{{paste.title}}</td>
+    <td>{{paste.language}}</td>
+    <td>{{paste.paste}}</td>
+  </tr>
+  </tbody>
+</table>
+</div>
