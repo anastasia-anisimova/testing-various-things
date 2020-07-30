@@ -6,19 +6,26 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
+import {PastebinService} from "./testing/pastebin.service";
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDataService} from "./testing/in-memory-data.service";
+import { PastbinComponent } from './testing/pastbin/pastbin.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PastbinComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
-  providers: [],
+  providers: [PastebinService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
