@@ -1,0 +1,10 @@
+.color {
+  color: green;
+}
+
+.logo {
+  background-image: url('test-img.png');
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+}
