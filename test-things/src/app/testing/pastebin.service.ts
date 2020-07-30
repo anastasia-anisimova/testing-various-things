@@ -12,7 +12,9 @@ export class PastebinService {
   constructor(private readonly http: HttpClient) {
   }
 
-  public getPastebin(): Observable<any> {
-    return this.http.get(this.pastebinUrl);
+  public getPastebin(): Promise<any> {
+    return this.http.get(this.pastebinUrl)
+      .toPromise()
+      .then(response => (response as any).json().data)
   }
 }
