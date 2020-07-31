@@ -10,12 +10,16 @@ import {PastebinService} from "./testing/pastebin.service";
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from "./testing/in-memory-data.service";
 import { PastbinComponent } from './testing/pastbin/pastbin.component';
+import { TestComponent } from './testing/test/test.component';
+import { ChildComponent } from './testing/test/child/child.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PastbinComponent
+    PastbinComponent,
+    TestComponent,
+    ChildComponent
   ],
   imports: [
     BrowserModule,
