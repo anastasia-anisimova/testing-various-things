@@ -3,12 +3,14 @@ import {TestComponent} from "./test.component";
 import {PastebinService} from "../pastebin.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ChildComponent} from "./child/child.component";
+import {anything, instance, mock, verify, when} from "ts-mockito";
 
 describe('TestComponent', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
   let el: HTMLElement;
   let service: PastebinService;
+  let mockedService: PastebinService;
 
   beforeEach(async(() => {
     const serviceStub = {commonText: '!!!'};
@@ -19,24 +21,44 @@ describe('TestComponent', () => {
         ChildComponent
       ],
       providers: [
-        //PastebinService
-        {
-          provide: PastebinService,
-          useValue: serviceStub
-        }
+        PastebinService
+        // {
+        //   provide: PastebinService,
+        //   useValue: serviceStub
+        // }
       ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(TestComponent);
       component = fixture.componentInstance;
       el = fixture.debugElement.nativeElement;
 
-      service = jasmine.createSpyObj('PastebinService', {
-        getText: '!!!'
+      mockedService = mock(PastebinService);
+      when(mockedService.getText()).thenReturn('www').thenReturn('second!');
+     // when(mockedService.getText(true)).thenReturn('ttt');
+      when(mockedService.getText(anything())).thenCall((isTesting: boolean): string => {
+        return `${isTesting}`;
       });
+
+      when(mockedService.commonText).thenReturn('text');
+      service = instance(mockedService);
+
+      // service = jasmine.createSpyObj('PastebinService', {
+      //   getText: '!!!'
+      // });
 
      // fixture.detectChanges();
     });
   }));
+
+  it('test mockito mock', () => {
+    expect(service).toBeTruthy();
+    expect(service.getText()).toEqual('www')
+    expect(service.getText()).toEqual('second!')
+    expect(service.getText(true)).toEqual('true')
+    expect(service.commonText).toEqual('text')
+    verify(mockedService.getText()).called();
+    verify(mockedService.commonText).atLeast(1);
+  });
 
   it('test component interaction', () => {
     fixture.detectChanges();
