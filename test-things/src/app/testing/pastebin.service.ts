@@ -14,7 +14,7 @@ export class PastebinService {
   constructor(private readonly http: HttpClient) {
   }
 
-  public getText() {
+  public getText(canTest?: boolean) {
     return '!!!';
   }
 
